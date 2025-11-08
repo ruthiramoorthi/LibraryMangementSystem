@@ -4,8 +4,8 @@ import Service.LibraryService;
 import java.util.Scanner;
 
 public class Main {
-    private static LibraryService svc = new LibraryService();
-    private static Scanner sc = new Scanner(System.in);
+    private final static LibraryService svc = new LibraryService();
+    private final static Scanner sc = new Scanner(System.in);
 
     public static void main(String[]args){
         System.out.println("===Library Management System===");
@@ -18,7 +18,7 @@ public class Main {
                 case "2" : searchBook(); break;
                 case "3" : registerMember(); break;
                 case "4" : borrowBook(); break;
-                case "5" : returnBook(); break;
+                //case "5" : returnBook(); break;
                 case "0" : running = false; break;
                 default:System.out.print("Invalid option");
             }
@@ -34,7 +34,7 @@ public class Main {
         System.out.println("author: ");String author = sc.nextLine();
         System.out.println("ISBN: ");String isbn = sc.nextLine();
         System.out.println("Quantity: ");int qty = Integer.parseInt(sc.nextLine());
-        Book b = new Book(title,author,isbn,qty);
+        Book b = new Book(title, author, isbn, qty);
         svc.addBook(b);
     }
     private static void searchBook(){
@@ -52,10 +52,5 @@ public class Main {
         System.out.println("Book ID to borrow: "); int bid = Integer.parseInt(sc.nextLine());
         System.out.println("Member ID: "); int mid = Integer.parseInt(sc.nextLine());
         svc.borrowBook(bid,mid);
-    }
-    private static void returnBook(){
-        System.out.println("Borrow ID to return (from borrows table): ");
-        int rid = Integer.parseInt(sc.nextLine());
-        svc.returnBook(rid);
     }
 }

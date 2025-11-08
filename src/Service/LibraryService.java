@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LibraryService {
-    private LibraryDAO dao = new LibraryDAO();
+    private final LibraryDAO dao = new LibraryDAO();
 
     public void addBook(Book b) {
         try {
@@ -43,11 +43,5 @@ public class LibraryService {
             boolean ok = dao.borrowBook(bookId,memberId);
             System.out.println(ok?"Borrowed successfully." : "Borrow failed (not available or error).");
         } catch (SQLException e) { System.err.println("Borrow error: "+e.getMessage());}
-    }
-
-    public void returnBook(int borrowId){
-        try{
-            boolean ok = dao.returnBook(borrowId);
-        }
     }
 }

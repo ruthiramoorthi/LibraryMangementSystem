@@ -74,7 +74,7 @@ public class LibraryDAO {
             try(ResultSet rs =ps.getGeneratedKeys()){
                 if(rs.next()) return rs.getInt(1);
             }
-            /*ResultSet rs = ps.getGeneratedKeys();
+            /* ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int generatedId = rs.getInt(1);
                 return generatedId;
@@ -113,14 +113,6 @@ public class LibraryDAO {
         } finally {
             c.setAutoCommit(true);
             c.close();
-        }
-    }
-
-    public boolean returnBook(int borrowId) throws SQLException{
-        String findSql = "select book_id,returned from borrows where id = ?";
-        try (Connection c = DBConnection.getConnection();
-             PreparedStatement ps = c.prepareStatement(findSql)){
-
         }
     }
 }

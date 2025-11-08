@@ -17,7 +17,7 @@ public class Book {
         this.totalQty = totalQty;
         this.availQty = availQty;
     }
-    public Book(String title,String author,String isbn,int totalQty,int availQty){
+    public Book(String title,String author,String isbn,int totalQty){
         this.id=id;
         this.title = title;
         this.author = author;
