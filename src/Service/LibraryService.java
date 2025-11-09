@@ -44,4 +44,11 @@ public class LibraryService {
             System.out.println(ok?"Borrowed successfully." : "Borrow failed (not available or error).");
         } catch (SQLException e) { System.err.println("Borrow error: "+e.getMessage());}
     }
+    public void returnBook(int borrowId) {
+        try {
+            boolean ok = dao.returnBook(borrowId);
+            System.out.println(ok ? "Returned successfully." : "Return failed invalid id or already returned).");
+        } catch (SQLException e) { System.err.println("Return error: " +
+                e.getMessage()); }
+    }
 }

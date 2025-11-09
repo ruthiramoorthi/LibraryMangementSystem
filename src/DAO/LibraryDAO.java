@@ -115,4 +115,28 @@ public class LibraryDAO {
             c.close();
         }
     }
+    public boolean returnBook(int borrowId) throws SQLException {
+        String findSql = "SELECT book_id, returned FROM borrows WHERE id = ?";
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(findSql)) {
+            ps.setInt(1, borrowId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) return false;
+                boolean returned = rs.getBoolean("returned");
+                int bookId = rs.getInt("book_id");
+                if (returned) return false; // already returned
+                String updBorrow =
+                        "UPDATE borrows SET returned = ?, return_date = ? WHERE id = ?";
+                try (PreparedStatement ps2 = c.prepareStatement(updBorrow)) {
+                    ps2.setBoolean(1, true);
+                    ps2.setDate(2, new Date(System.currentTimeMillis()));
+                    ps2.setInt(3, borrowId);
+                    ps2.executeUpdate();
+                }
+                Book b = getBookByID(bookId);
+                updateBookAvail(bookId, b.getAvailQty() + 1);
+                return true;
+            }
+        }
+    }
 }

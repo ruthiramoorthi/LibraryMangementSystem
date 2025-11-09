@@ -18,7 +18,7 @@ public class Main {
                 case "2" : searchBook(); break;
                 case "3" : registerMember(); break;
                 case "4" : borrowBook(); break;
-                //case "5" : returnBook(); break;
+                case "5" : returnBook(); break;
                 case "0" : running = false; break;
                 default:System.out.print("Invalid option");
             }
@@ -53,4 +53,10 @@ public class Main {
         System.out.println("Member ID: "); int mid = Integer.parseInt(sc.nextLine());
         svc.borrowBook(bid,mid);
     }
+    private static void returnBook() {
+        System.out.println("Borrow ID to return (from borrows table):"); int
+                rid = Integer.parseInt(sc.nextLine());
+                svc.returnBook(rid);
+    }
+}
 }
